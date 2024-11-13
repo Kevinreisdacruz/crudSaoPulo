@@ -1,7 +1,8 @@
 <?php
 
 class jogador{
-    public $nome;
+    public $jogador;
+    public $camiseta;
     public $nascimento;
     public $gols;
     public $valor;
@@ -30,6 +31,23 @@ class jogador{
         $resultado->execute();
         
         return $resultado->fetchALL(PDO::FETCH_OBJ) ;
+    }
+
+    public function cadastrar(){
+        $sql = "INSERT INTO saopaulofutebolclube(jogador,camiseta,nascimento,gols,valor,salario) values (:jogador, :camiseta, :nascimento, :gols,:valor,:salario)";
+        $stmt = $this->bd->prepare($sql);
+        $stmt -> bindparam(':jogador', $this->jogador, PDO::PARAM_STR); 
+        $stmt -> bindparam(':camiseta', $this->camiseta, PDO::PARAM_STR); 
+        $stmt -> bindparam(':nascimento', $this->nascimento, PDO::PARAM_STR); 
+        $stmt -> bindparam(':gols', $this->gols, PDO::PARAM_STR); 
+        $stmt -> bindparam(':valor', $this->valor, PDO::PARAM_STR); 
+        $stmt -> bindparam(':salario', $this->salario, PDO::PARAM_STR); 
+
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 
