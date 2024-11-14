@@ -1,6 +1,7 @@
 <?php
 
 class jogador{
+    public $id;
     public $jogador;
     public $camiseta;
     public $nascimento;
@@ -24,24 +25,66 @@ class jogador{
         return $resultado;
     }
 
-    public function lerJogador($jogador){
-        $sql = "SELECT * FROM saopaulofutebolclube WHERE jogador like :jogador;";
-        $resultado = $this->bd->query($sql);
-        $resultado->bindparam(':jogador', $jogador);
-        $resultado->execute();
+    // public function lerJogador($jogador){
+    //    $jogador = "%" . $jogador . "%";
+    //    $sql = "SELECT * FROM saopaulofutebolclube WHERE  Jogador LIKE :Jogador;";
+    //    $resultado = $this->bd->prepare($sql);
+    //    $resultado ->bindparam(':Jogador', $jogador);
+    //    $resultado ->execute();
         
-        return $resultado->fetchALL(PDO::FETCH_OBJ) ;
+    //     return $resultado->fetchALL(PDO::FETCH_OBJ) ;
+    // }
+
+    public function lerJogador($id){
+        $sql = "SELECT * FROM saopaulofutebolclube WHERE Id LIKE :Id;";
+        $resultado = $this->bd->prepare($sql);
+        $resultado ->bindparam(':Id', $id);
+        $resultado ->execute();
+         
+        return $resultado->fetchALL(PDO::FETCH_OBJ);
     }
 
     public function cadastrar(){
-        $sql = "INSERT INTO saopaulofutebolclube(jogador,camiseta,nascimento,gols,valor,salario) values (:jogador, :camiseta, :nascimento, :gols,:valor,:salario)";
+        $sql = "INSERT INTO saopaulofutebolclube(Jogador,NumeroCamiseta,Nascimento,GolsFeitos,ValorCompra,Salario) values (:Jogador, :NumeroCamiseta, :Nascimento, :GolsFeitos,:ValorCompra,:Salario)";
         $stmt = $this->bd->prepare($sql);
-        $stmt -> bindparam(':jogador', $this->jogador, PDO::PARAM_STR); 
-        $stmt -> bindparam(':camiseta', $this->camiseta, PDO::PARAM_STR); 
-        $stmt -> bindparam(':nascimento', $this->nascimento, PDO::PARAM_STR); 
-        $stmt -> bindparam(':gols', $this->gols, PDO::PARAM_STR); 
-        $stmt -> bindparam(':valor', $this->valor, PDO::PARAM_STR); 
-        $stmt -> bindparam(':salario', $this->salario, PDO::PARAM_STR); 
+        $stmt -> bindparam(':Jogador', $this->jogador, PDO::PARAM_STR); 
+        $stmt -> bindparam(':NumeroCamiseta', $this->camiseta, PDO::PARAM_STR); 
+        $stmt -> bindparam(':Nascimento', $this->nascimento, PDO::PARAM_STR); 
+        $stmt -> bindparam(':GolsFeitos', $this->gols, PDO::PARAM_STR); 
+        $stmt -> bindparam(':ValorCompra', $this->valor, PDO::PARAM_STR); 
+        $stmt -> bindparam(':Salario', $this->salario, PDO::PARAM_STR); 
+
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // public function deletar(){
+    //     $sql = "DELETE FROM saopaulofutebolclube where Jogador = :Jogador";
+    //     $stmt = $this ->bd->prepare($sql);
+    //     $stmt -> bindparam(':Jogador', $this->Jogador);
+
+    //     if($stmt->execute()){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+
+    // }
+
+
+    public function atualizar(){
+        $sql = "UPDATE saopaulofutebolclube SET Jogador = :Jogador,NumeroCamiseta = :NumeroCamiseta, Nacimento = :Nascimento, GolsFeitos = GolsFeitos, ValorCompra = :ValorCompra, Salario = :Salario WHERE Id = :Id";
+        $stmt = $this ->bd->prepare($sql);
+        $stmt -> bindparam(':Id', $this->id, PDO::PARAM_STR);
+        $stmt -> bindparam(':Jogador', $this->jogador, PDO::PARAM_STR);
+        $stmt -> bindparam(':NumeroCamiseta', $this->camiseta, PDO::PARAM_STR);
+        $stmt -> bindparam(':Nascimento', $this->nascimento, PDO::PARAM_STR);
+        $stmt -> bindparam(':GolsFeitos', $this->gols, PDO::PARAM_STR);
+        $stmt -> bindparam(':ValorCompra', $this->valor, PDO::PARAM_STR);
+        $stmt -> bindparam(':Salario', $this->salario, PDO::PARAM_STR);
 
         if($stmt->execute()){
             return true;

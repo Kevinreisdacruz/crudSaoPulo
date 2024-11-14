@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="" method="post">
+<form action="funcoes.php" method="post">
     <input type="text" name="jogador" placeholder="nome do jogador">
     <input type="text" name="camiseta" placeholder="numero da camiseta">
     <input type="text" name="nascimento" placeholder=" data de nascimento">

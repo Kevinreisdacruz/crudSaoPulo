@@ -18,6 +18,7 @@ function index(){
 }
 
 if(isset($_POST['cadastrar'])){
+    $a->id = $_POST['id'];
     $a->jogador = $_POST['jogador'];
     $a->camiseta= $_POST['camiseta'];
     $a->nascimento = $_POST['nascimento'];
@@ -26,6 +27,20 @@ if(isset($_POST['cadastrar'])){
     $a->salario= $_POST['salario'];
 
     if($a->cadastrar()){
+        header("Location:index.php");
+    }
+}
+
+if(isset($_POST['atualizar'])){
+    $a->id = $_POST['id'];
+    $a->jogador = $_POST['jogador'];
+    $a->camiseta = $_POST['camiseta'];
+    $a->nascimento = $_POST['nascimento'];
+    $a->gols = $_POST['gols'];
+    $a->valor = $_POST['valor'];
+    $a->salario = $_POST['salario'];
+    
+    if($a->atualizar()){
         header("Location:index.php");
     }
 }
