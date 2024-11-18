@@ -12,6 +12,7 @@ $banco = new database();
 $bd = $banco->conectar();
 $jogador = new jogador($bd);
 global $jogador;
+procurar();
 index();
 
 
@@ -31,32 +32,32 @@ if ($jogador) {
       </tr>
       <tbody>';
   foreach ($jogador as $infos) {
-    echo "<tr>
-    <td>$infos->Id</td>
-    <td>$infos->Jogador</td>
-    <td>$infos->NumeroCamiseta </td>
-    <td>$infos->Nascimento</td>
-    <td>$infos->GolsFeitos</td>
-    <td>$infos->ValorCompra</td>
-    <td>$infos->Salario</td>
-    <td><a href= 'funcoes.php?deletar= $infos->Jogador'>deletar</a></td><br>
-    <td><a href= 'atualizar.php?atualizar= $infos->Jogador'>atualizar</a></td><br>
-    </tr>";
+    echo '<tr>
+    <td>'.$infos->Id.'</td>
+    <td>'.$infos->Jogador.'</td>
+    <td>'.$infos->NumeroCamiseta .'</td>
+    <td>'.$infos->Nascimento.'</td>
+    <td>'.$infos->GolsFeitos.'</td>
+    <td>'.$infos->ValorCompra.'</td>
+    <td>'.$infos->Salario.'</td>
+    <td><a href= "funcoes.php?deletar=' . $infos->Id. ' ">deletar</a></td><br>
+    <td><a href= "atualizar.php?atualizar=' . $infos->Id .' ">atualizar</a></td><br>
+    </tr>';
   }
   echo '</tbody>';
   echo '</table>';
 }
 
-if(isset($_POST['jogador'])){
-  foreach($futebol->lerDados($_POST['jogador']) as $saopaulo){
-    echo "<p>". $saopaulo->jogador . "</p>";
+if(isset($_POST['buscar'])){
+  foreach($procurarJogador as $saopaulo){
+    echo "<p>". $saopaulo->Jogador . "</p>";
   }
 }
 
 ?>
 
-<form action="">
-  <input type="text" name="jogador">
+<form action="index.php" method="post">
+  <input type="text" name="procurar">
   <button name="buscar">buscar</button>
 </form>
 

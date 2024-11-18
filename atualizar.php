@@ -22,13 +22,13 @@ $jogador = new jogador($bd);
     foreach($jogador->lerJogador($_GET["atualizar"]) as $infos){
 
         echo '<form action="funcoes.php" method="post">
-        <input type="text" name="jogador" value="'. $infos->Id.'"><br><br>
-        <input type="text" name="jogador" value="'. $infos->Jogador.'"><br><br>
-        <input type="text" name="camiseta" value="'. $infos->NumeroCamiseta.'"><br><br>
-        <input type="text" name="nascimento" value="'. $infos->Nascimento.'"><br><br>
-        <input type="text" name="gols" value="'. $infos->GolsFeitos.'"><br><br>
-        <input type="text" name="valor" value="'. $infos->ValorCompra.'"><br><br>
-        <input type="text" name="salario" value="'. $infos->Salario.'"><br><br>';
+        <input type="text" name="id_atualizar" value="'. $infos->Id.'"><br><br>
+        <input type="text" name="jogador_atualizar" value="'. $infos->Jogador.'"><br><br>
+        <input type="text" name="camiseta_atualizar" value="'. $infos->NumeroCamiseta.'"><br><br>
+        <input type="text" name="nascimento_atualizar" value="'. $infos->Nascimento.'"><br><br>
+        <input type="text" name="gols_atualizar" value="'. $infos->GolsFeitos.'"><br><br>
+        <input type="text" name="valor_atualizar" value="'. $infos->ValorCompra.'"><br><br>
+        <input type="text" name="salario_atualizar" value="'. $infos->Salario.'"><br><br>';
 
         echo '<button name="atualizar">atualizar</button>';
         
